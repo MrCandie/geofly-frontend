@@ -30,7 +30,7 @@ const ProtectedRoute = () => {
 
   if (token && email && name) {
     login({ email, fullName: name }, token);
-    return <Navigate to="/" state={{ replace: true }} replace />;
+    return <Navigate to="/" replace />;
   }
 
   const unauth = ["/login", "/register"];
