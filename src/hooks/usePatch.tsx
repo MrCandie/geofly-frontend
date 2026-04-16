@@ -24,7 +24,6 @@ const patchData = async ({
   token,
   contentType = "application/json",
   showToast = true,
-  logout,
 }: PatchDataParams) => {
   const headers = {
     Accept: "application/json",
@@ -42,7 +41,7 @@ const patchData = async ({
     const statusCode = error.response?.status || 500;
     const errorBody = error.response?.data?.message || "Something went wrong";
 
-    let messageText =
+    const messageText =
       typeof errorBody !== "string" ? "Something went wrong" : errorBody;
 
     if (showToast) toast.error(messageText);
