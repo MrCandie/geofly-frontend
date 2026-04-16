@@ -3,11 +3,14 @@ import {
   createRoutesFromElements,
   Navigate,
   Outlet,
+  replace,
   Route,
   RouterProvider,
   useLocation,
+  useNavigate,
+  useSearchParams,
 } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 
 import "./App.css";
 import NotFound from "./pages/not-found";
@@ -19,8 +22,18 @@ const Signup = lazy(() => import("./pages/auth/register"));
 const Home = lazy(() => import("./pages/home/home"));
 
 const ProtectedRoute = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, login } = useAuth();
+  const [searchParam] = useSearchParams();
   const location = useLocation();
+
+  const token = searchParam.get("token");
+  const email = searchParam.get("email");
+  const name = searchParam.get("name");
+
+  if (token && email && name) {
+    login({ email, fullName: name }, token);
+    return <Navigate to="/login" state={{ replace: true }} replace />;
+  }
 
   const unauth = ["/login", "/register"];
 
