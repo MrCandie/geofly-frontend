@@ -36,7 +36,7 @@ export default function Header() {
             <div className="w-full h-full rounded-full bg-white dark:bg-[#001c10] flex items-center justify-center font-black text-[#e6b810] text-sm transition-colors duration-500">
               {user?.fullName
                 ?.split(" ")
-                .map((n) => n[0])
+                .map((n: any) => n[0])
                 .join("") || "AA"}
             </div>
           </div>
