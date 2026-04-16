@@ -6,9 +6,10 @@ import {
   Route,
   RouterProvider,
   useLocation,
+  useNavigate,
   useSearchParams,
 } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 
 import "./App.css";
 import NotFound from "./pages/not-found";
@@ -23,22 +24,24 @@ const ProtectedRoute = () => {
   const { isAuthenticated, login } = useAuth();
   const [searchParam] = useSearchParams();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const token = searchParam.get("token");
   const email = searchParam.get("email");
   const name = searchParam.get("name");
 
-  if (token && email && name) {
-    login({ email, fullName: name }, token);
-    return <Navigate to="/" replace />;
-  }
+  useEffect(() => {
+    if (token && email && name) {
+      login({ email, fullName: name }, token);
+
+      navigate("/", { replace: true });
+    }
+  }, [token, email, name, login, navigate]);
 
   const unauth = ["/login", "/register"];
 
-  const isExactUnauth = unauth.includes(location.pathname);
-
   const isUnauthPath =
-    isExactUnauth ||
+    unauth.includes(location.pathname) ||
     unauth.some((path) => location.pathname.startsWith(path) && path !== "/");
 
   if (!isAuthenticated && !isUnauthPath) {
