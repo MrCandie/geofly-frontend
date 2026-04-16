@@ -40,8 +40,6 @@ const Signup: React.FC = () => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
   };
 
-  console.log(passwordStrength);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -73,7 +71,6 @@ const Signup: React.FC = () => {
       );
     if (passwordStrength === 2)
       return toast.error("Password must contain at least 1 number");
-
     if (passwordStrength === 3)
       return toast.error("Password must contain at least 1 special character");
 
@@ -86,7 +83,7 @@ const Signup: React.FC = () => {
       title="JOIN THE"
       subtitle="Create your player profile"
     >
-      <div className="bg-[#002516] border border-white/5 p-8 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+      <div className="bg-white dark:bg-[#002516] border border-black/5 dark:border-white/5 p-8 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-all duration-500">
         <form onSubmit={handleSubmit} className="space-y-5">
           <GoogleAuth />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -95,14 +92,14 @@ const Signup: React.FC = () => {
                 Full Name
               </label>
               <div className="relative">
-                <User className="absolute left-4 top-4 text-gray-600 w-5 h-5" />
+                <User className="absolute left-4 top-4 text-gray-400 dark:text-gray-600 w-5 h-5" />
                 <input
                   name="fullName"
                   type="text"
                   required
                   value={formData.fullName}
                   onChange={handleChange}
-                  className="w-full bg-[#001c10] border border-white/10 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-none focus:border-[#e6b810] transition-all placeholder:text-gray-700"
+                  className="w-full bg-gray-50 dark:bg-[#001c10] border border-black/5 dark:border-white/10 rounded-xl pl-12 pr-4 py-4 text-[#001c10] dark:text-white focus:outline-none focus:border-[#e6b810] transition-all placeholder:text-gray-400 dark:placeholder:text-gray-700"
                   placeholder="John Doe"
                 />
               </div>
@@ -113,14 +110,14 @@ const Signup: React.FC = () => {
                 Email
               </label>
               <div className="relative">
-                <Mail className="absolute left-4 top-4 text-gray-600 w-5 h-5" />
+                <Mail className="absolute left-4 top-4 text-gray-400 dark:text-gray-600 w-5 h-5" />
                 <input
                   name="email"
                   type="email"
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full bg-[#001c10] border border-white/10 rounded-xl pl-12 pr-4 py-4 text-white focus:outline-none focus:border-[#e6b810] transition-all placeholder:text-gray-700"
+                  className="w-full bg-gray-50 dark:bg-[#001c10] border border-black/5 dark:border-white/10 rounded-xl pl-12 pr-4 py-4 text-[#001c10] dark:text-white focus:outline-none focus:border-[#e6b810] transition-all placeholder:text-gray-400 dark:placeholder:text-gray-700"
                   placeholder="john@example.com"
                 />
               </div>
@@ -132,20 +129,20 @@ const Signup: React.FC = () => {
               Create Password
             </label>
             <div className="relative">
-              <ShieldCheck className="absolute left-4 top-4 text-gray-600 w-5 h-5" />
+              <ShieldCheck className="absolute left-4 top-4 text-gray-400 dark:text-gray-600 w-5 h-5" />
               <input
                 name="password"
                 type={showPassword ? "text" : "password"}
                 required
                 value={formData.password}
                 onChange={handleChange}
-                className="w-full bg-[#001c10] border border-white/10 rounded-xl pl-12 pr-12 py-4 text-white focus:outline-none focus:border-[#e6b810] transition-all placeholder:text-gray-700"
+                className="w-full bg-gray-50 dark:bg-[#001c10] border border-black/5 dark:border-white/10 rounded-xl pl-12 pr-12 py-4 text-[#001c10] dark:text-white focus:outline-none focus:border-[#e6b810] transition-all placeholder:text-gray-400 dark:placeholder:text-gray-700"
                 placeholder="••••••••"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-4 top-4 text-gray-500 hover:text-[#e6b810]"
+                className="absolute right-4 top-4 text-gray-400 hover:text-[#e6b810] transition-colors"
               >
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
@@ -156,7 +153,9 @@ const Signup: React.FC = () => {
                 <div
                   key={step}
                   className={`h-1.5 flex-1 rounded-full transition-all duration-500 ${
-                    passwordStrength >= step ? "bg-[#e6b810]" : "bg-white/5"
+                    passwordStrength >= step
+                      ? "bg-[#e6b810]"
+                      : "bg-black/5 dark:bg-white/5"
                   }`}
                 />
               ))}
@@ -174,12 +173,12 @@ const Signup: React.FC = () => {
                 required
                 value={formData.confirmPassword}
                 onChange={handleChange}
-                className="w-full bg-[#001c10] border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-[#e6b810] transition-all placeholder:text-gray-700"
+                className="w-full bg-gray-50 dark:bg-[#001c10] border border-black/5 dark:border-white/10 rounded-xl px-4 py-4 text-[#001c10] dark:text-white focus:outline-none focus:border-[#e6b810] transition-all placeholder:text-gray-400 dark:placeholder:text-gray-700"
                 placeholder="••••••••"
               />
               {formData.confirmPassword &&
                 formData.password === formData.confirmPassword && (
-                  <CheckCircle2 className="absolute right-4 top-4 text-green-500 w-5 h-5" />
+                  <CheckCircle2 className="absolute right-4 top-4 text-green-500 w-5 h-5 animate-in zoom-in" />
                 )}
             </div>
           </div>
@@ -187,7 +186,7 @@ const Signup: React.FC = () => {
           <button
             type="submit"
             disabled={signupHandler.isPending}
-            className="w-full bg-[#e6b810] text-[#001c10] font-black py-5 rounded-xl uppercase tracking-tighter hover:bg-[#ffcc14] active:scale-[0.98] transition-all flex items-center justify-center disabled:opacity-70 mt-4"
+            className="w-full bg-[#e6b810] text-[#001c10] font-black py-5 rounded-xl uppercase tracking-tighter hover:bg-[#ffcc14] active:scale-[0.98] transition-all flex items-center justify-center disabled:opacity-70 mt-4 shadow-[0_10px_30px_rgba(230,184,16,0.2)]"
           >
             {signupHandler.isPending ? (
               <Loader2 className="animate-spin w-6 h-6" />
@@ -196,12 +195,17 @@ const Signup: React.FC = () => {
             )}
           </button>
 
-          <Link to="/login" className="text-center text-xs text-gray-500 mt-6">
-            Already have an account?
-            <span className="text-[#e6b810] cursor-pointer hover:underline font-bold ml-1">
-              Login
-            </span>
-          </Link>
+          <div className="flex justify-center pt-2">
+            <Link
+              to="/login"
+              className="text-center text-xs text-gray-500 dark:text-gray-400"
+            >
+              Already have an account?
+              <span className="text-[#e6b810] cursor-pointer hover:underline font-bold ml-1">
+                Login
+              </span>
+            </Link>
+          </div>
         </form>
       </div>
     </AuthLayout>

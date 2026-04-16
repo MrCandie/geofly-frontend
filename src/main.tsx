@@ -5,16 +5,19 @@ import App from "./App.tsx";
 import { AuthProvider } from "./context/auth.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
+import { ThemeProvider } from "./context/theme.tsx";
 
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <App />
-        <ToastContainer />
-      </AuthProvider>
+      <ThemeProvider>
+        <AuthProvider>
+          <App />
+          <ToastContainer />
+        </AuthProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   </StrictMode>,
 );

@@ -35,16 +35,16 @@ const LoginPage: React.FC = () => {
 
   return (
     <AuthLayout badge="PASS" title="STADIUM" subtitle="Authentication Portal">
-      <div className="bg-[#002516] border border-white/5 p-8 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+      <div className="bg-white dark:bg-[#002516] border border-black/5 dark:border-white/5 p-8 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-all duration-500">
         <form onSubmit={handleSubmit} className="space-y-6">
           <GoogleAuth />
 
           <div className="flex items-center gap-4 py-2">
-            <div className="h-[1px] flex-1 bg-white/5" />
-            <span className="text-[10px] font-bold text-gray-600 uppercase tracking-widest">
+            <div className="h-[1px] flex-1 bg-black/5 dark:bg-white/5" />
+            <span className="text-[10px] font-bold text-gray-400 dark:text-gray-600 uppercase tracking-widest">
               OR
             </span>
-            <div className="h-[1px] flex-1 bg-white/5" />
+            <div className="h-[1px] flex-1 bg-black/5 dark:bg-white/5" />
           </div>
 
           <div>
@@ -57,7 +57,7 @@ const LoginPage: React.FC = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-[#001c10] border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-[#e6b810] transition-all duration-300 placeholder:text-gray-600"
+                className="w-full bg-gray-50 dark:bg-[#001c10] border border-black/5 dark:border-white/10 rounded-xl px-4 py-4 text-[#001c10] dark:text-white focus:outline-none focus:border-[#e6b810] transition-all duration-300 placeholder:text-gray-400 dark:placeholder:text-gray-600"
                 placeholder="e.g. akin@stadium.com"
               />
               {isEmailValid(email) && (
@@ -78,13 +78,13 @@ const LoginPage: React.FC = () => {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-[#001c10] border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-[#e6b810] transition-all duration-300 placeholder:text-gray-600"
+                className="w-full bg-gray-50 dark:bg-[#001c10] border border-black/5 dark:border-white/10 rounded-xl px-4 py-4 text-[#001c10] dark:text-white focus:outline-none focus:border-[#e6b810] transition-all duration-300 placeholder:text-gray-400 dark:placeholder:text-gray-600"
                 placeholder="••••••••"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-4 top-4 text-gray-500 hover:text-[#e6b810] transition-colors"
+                className="absolute right-4 top-4 text-gray-400 hover:text-[#e6b810] transition-colors"
               >
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
@@ -94,7 +94,7 @@ const LoginPage: React.FC = () => {
           <button
             type="submit"
             disabled={loginHandler.isPending}
-            className="group relative w-full bg-[#e6b810] text-[#001c10] font-black py-5 rounded-xl uppercase tracking-tighter hover:bg-[#ffcc14] active:scale-[0.98] transition-all flex items-center justify-center disabled:opacity-70 overflow-hidden"
+            className="group relative w-full bg-[#e6b810] text-[#001c10] font-black py-5 rounded-xl uppercase tracking-tighter hover:bg-[#ffcc14] active:scale-[0.98] transition-all flex items-center justify-center disabled:opacity-70 overflow-hidden shadow-[0_10px_30px_rgba(230,184,16,0.2)]"
           >
             <span
               className={`flex items-center gap-2 ${
@@ -111,8 +111,11 @@ const LoginPage: React.FC = () => {
           </button>
 
           <div className="pt-4 flex flex-col gap-4 items-center">
-            <div className="h-[1px] w-12 bg-white/10" />
-            <Link to="/register" className="text-xs text-gray-400">
+            <div className="h-[1px] w-12 bg-black/5 dark:bg-white/10" />
+            <Link
+              to="/register"
+              className="text-xs text-gray-500 dark:text-gray-400"
+            >
               New scout?{" "}
               <span className="text-[#e6b810] cursor-pointer hover:underline font-bold">
                 Create Account

@@ -22,16 +22,7 @@ const ProtectedRoute = () => {
   const { isAuthenticated } = useAuth();
   const location = useLocation();
 
-  const unauth = [
-    "/",
-    "/restaurants/list",
-    "/login",
-    "/register",
-    "/forgot-password",
-    "/reset-password",
-    "/verify",
-    "/complete-onboarding",
-  ];
+  const unauth = ["/login", "/register"];
 
   const isExactUnauth = unauth.includes(location.pathname);
 
