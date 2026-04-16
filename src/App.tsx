@@ -3,14 +3,12 @@ import {
   createRoutesFromElements,
   Navigate,
   Outlet,
-  replace,
   Route,
   RouterProvider,
   useLocation,
-  useNavigate,
   useSearchParams,
 } from "react-router-dom";
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense } from "react";
 
 import "./App.css";
 import NotFound from "./pages/not-found";
